@@ -8,7 +8,7 @@ from PyPDF2 import PdfFileReader, PdfFileWriter
 import re
 
 ##INPUTS
-inputs = input('Input all X:', ) #put the input with spaces
+inputs = input('Input all X:', ) #Put the input with spaces
 
 path_to_pdf_file = input('Input PDF path:', )
 
@@ -20,23 +20,20 @@ list_of_items = inputs_split_into_list
 listnum = []
 
 ##MAIN FUNCTION
-#Pdf Object
-object = PyPDF2.PdfFileReader(adobe_input)
+object = PyPDF2.PdfFileReader(adobe_input) #Pdf Object
 
-#Get number of pages
-NumPages = object.getNumPages()
-def find_pg():
-    for vin in listvin:
-        # Extract text and do the search
-        for i in range(0, NumPages):
-            PageObj = object.getPage(i)
-            Text = PageObj.extractText()
-            if re.search(vin,Text):
-                listnum.append(i)
-                listnum.append(i+1)
-        zaz = (len(listnum)/2)/len(listvin)*100
-        print(round(zaz,2),end="\r")
-find_pg()
+num_pages = object.getNumPages() #Get number of pages
+
+for x in list_of_items:
+    for i in range(0, num_pages):
+        page_obj = object.getPage(i)
+        Text = page_obj.extractText()
+        if re.search(x,Text):
+            listnum.append(i)
+            listnum.append(i+1)
+    loading = (len(listnum)/2)/len(list_of_items)*100 
+    print(round(loading,2),end="\r") #Prints the % complete of the task
+
 
 ##CONCATING ALL OF THE FILES
 adobe_input = adobe_input[:-4]
@@ -46,13 +43,13 @@ file_base_name = pdf_file_path.replace('.pdf', '')
 
 pdf = PdfFileReader(pdf_file_path)
 
-pages = listnum # page 1, 3, 5
+pages = listnum 
 pdfWriter = PdfFileWriter()
 
 for page_num in pages:
     pdfWriter.addPage(pdf.getPage(page_num))
 
-with open('{0}_subset.pdf'.format(file_base_name), 'wb') as f:
+with open('{0}_subset.pdf'.format(file_base_name), 'wb') as f: #Your_file_name + _subset.pdf
     pdfWriter.write(f)
     f.close()
 
