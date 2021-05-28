@@ -20,7 +20,7 @@ list_of_items = inputs_split_into_list
 listnum = []
 
 ##MAIN FUNCTION
-object = PyPDF2.PdfFileReader(adobe_input) #Pdf Object
+object = PyPDF2.PdfFileReader(adobe_input) #Pdf object
 
 num_pages = object.getNumPages() #Get number of pages
 
