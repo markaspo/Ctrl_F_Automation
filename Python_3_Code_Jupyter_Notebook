@@ -30,9 +30,9 @@ for x in list_of_items:
         Text = page_obj.extractText()
         if re.search(x,Text):
             listnum.append(i)
-            listnum.append(i+1)
-    loading = (len(listnum)/2)/len(list_of_items)*100 
-    print(round(loading,2),end="\r") #Prints the % complete of the task
+            listnum.append(i + 1)
+    loading = (len(listnum) / 2) / len(list_of_items) * 100 
+    print(round(loading, 2),end = "\r") #Prints the % complete of the task
 
 
 ##CONCATING ALL OF THE FILES
